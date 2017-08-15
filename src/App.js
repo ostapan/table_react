@@ -1,72 +1,92 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-//import EventEmittrer from 'events';
 import MyTable from './MyTable';
 
 //window.ee = new EventEmitter();
 
 const DEFAULT_CELL_SIZE = 50;
-const DEFAULT_ROWS_NUMBER = 4;
-const DEFAULT_COLS_NUMBER = 4;
+
+const initialCellsArray = [
+  [
+    {
+      id: '001001',
+      content: '11'
+    },
+    {
+      id: '001002',
+      content: '12'
+    },
+    {
+      id: '001003',
+      content: '13'
+    },
+    {
+      id: '001004',
+      content: '14'
+    }
+  ],
+  [
+    {
+      id: '002001',
+      content: '21'
+    },
+    {
+      id: '002002',
+      content: '22'
+    },
+    {
+      id: '002003',
+      content: '23'
+    },
+    {
+      id: '002004',
+      content: '24'
+    }
+  ],
+  [
+    {
+      id: '003001',
+      content: '31'
+    },
+    {
+      id: '003002',
+      content: '32'
+    },
+    {
+      id: '003003',
+      content: '33'
+    },
+    {
+      id: '003004',
+      content: '34'
+    }
+  ],
+  [
+    {
+      id: '004001',
+      content: '41'
+    },
+    {
+      id: '004002',
+      content: '42'
+    },
+    {
+      id: '004003',
+      content: '43'
+    },
+    {
+      id: '004004',
+      content: '44'
+    }
+  ]
+];
 
 class App extends Component {
   
   constructor(props) {
     super(props);
-    this.state.cols = DEFAULT_COLS_NUMBER;
-    this.state.rows = DEFAULT_ROWS_NUMBER;
   }
-
-  deleteRow() {
-    // TODO: refactor into certain row deletion
-    let prevRows = this.state.rows;
-    if (prevRows > 1) prevRows--;
-    setState({ rows: prevRows});
-  }
-
-  deleteCol() {
-    // TODO: refactor into certain cell deletion in each row
-    let prevCols = this.state.cols;
-    if (prevCols > 1) prevCols--;
-    setState({ rows: prevCols});
-  }
-
-
-  // no need in all this code below if root comonent becomes an event dispatcher
-  // via state and props interfaces
-  
-  // componentDidMount(){
-  //   var self = this;
-    
-  //   window.ee.addListener('Row.add', function() {
-  //     var nextRows = self.state.rows + 1;
-  //     self.setState({rows: nextRows});
-  //   });
-
-  //   window.ee.addListener('Col.add', function() {
-  //     var nextCols = self.state.cols + 1;
-  //     self.setState({cols: nextCols});
-  //   });
-
-  //   window.ee.addListener('Row.del', function() {
-  //     var nextRows = self.state.rows - 1;
-  //     self.setState({rows: nextRows});
-  //   });
-
-  //   window.ee.addListener('Col.del', function() {
-  //     var nextColws = self.state.cols - 1;
-  //     self.setState({cols: nextCols});
-  //   });
-
-  // }
-
-  // componentWillUnmount() {
-  //   window.ee.removeListener('Row.add');    
-  //   window.ee.removeListener('Row.del');
-  //   window.ee.removeListener('Col.add');
-  //   window.ee.removeListener('Col.del');
-  // }
 
   render() {
     return (
@@ -77,8 +97,8 @@ class App extends Component {
         </div>
         <div className='myTable'>
           <MyTable 
-            cols={this.state.cols} 
-            rows={this.state.rows} 
+            allCells = {initialCellsArray}
+            cellSize = {DEFAULT_CELL_SIZE}
             />
         </div>
       </div>

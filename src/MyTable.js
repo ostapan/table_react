@@ -1,76 +1,184 @@
 /* 
  * MyTable component
- * uses rows, cells, controls
+ * uses rows, control panels and add buttons
  */
 
 import React, { Component, PropTypes } from 'react';
-import TableRow from 'TableRow';
-import Cell from 'Cell';
-import Panel from 'Panel';
-import Button from 'Button';
+import TableRow from './TableRow';
+import AddButton from './AddButton'
+import DeleteButton from './DeleteButton'
 
 class MyTable extends Component {
   
   constructor(props) {
     super(props);    
     this.state = {
-      allCels: this.props.,
-      showDelColButton: false,
-      showDelRowButton: false,
-      currentPosition: {colPostion: -1, rowPosition: -1}
+      cellsData: this.props.allCells,
+      isDelRowBtnShown: false,
+      DelRowBtnPosition: -1,
+      isDelColumnBtnShown: false,
+      DelColumnBtnPosition: -1
     }
-    this.showDelButton = this.showDelButton.bind(this);
+    this.showDeleteControls = this.showDeleteControls.bind(this);
+    this.hideDeleteControls = this.hideDeleteControls.bind(this);
+    this.addRowHandler = this.addRowHandler.bind(this);
+    this.addColumnHandler = this.addColumnHandler.bind(this);
+    this.deleteLine = this.deleteLine.bind(this);
   }
 
   static propTypes = {
-    cellData: PropTypes.array.isRequired    
+    allCells: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object)).isRequired,
+    cellSize: PropTypes.number.isRequired,
   }
 
-  showDelButton(coords) {
-    const {curCol, curRow} = coords;
-    const rowsAmount = this.props.allCels.length;
-    let showDelColButton =  (colsAmount > 1) ;
-    if ( rowsAmount <= 1 || !curCol) curCol = -1;
-    if ( colsAmount <= 1 || !curRow) curRow = -1;
+  randomId() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        let r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+  }
+
+  randomContent() {
+    return '#'+Math.floor(Math.random()*16777215).toString(16);
+  }
+
+  showDeleteControls(coords) {
+    console.log(`showDeleteControls(row: ${coords.row}, col: ${coords.col})`);
+    const data = this.state.cellsData;
+    const rowsAmount = data.length;
+    const columnsAmount = data[0].length;    
+
     this.setState({
-      currentPosition: {colPostion: curCol, rowPosition: curRow}
-      showDelColButton: false,
-      showDelRowButton: false     
-    })
+      isDelRowBtnShown: (rowsAmount > 1),
+      DelRowBtnPosition: coords.row,
+      isDelColumnBtnShown: (columnsAmount > 1),
+      DelColumnBtnPosition: coords.col
+    });
+  }
+  
+  hideDeleteControls(coords) {
+    console.log(`hideDeleteControls(row: ${coords.row}, col: ${coords.col})`);
+    this.setState({
+      isDelRowBtnShown: false,      
+      isDelColumnBtnShown: false
+    });
   }
 
-  render() {
-
-    const tableTemplate = this.props.allCells.map( function(rowData, rowIndex) {
-      return (
-        <TableRow key={rowIndex} rowData={rowData} />
-        );
-    });
+  addRowHandler() {
+    console.log('addRowHandler executed');
     
+    let data = this.state.cellsData;
+    let newContent = this.randomContent();
+    let newRow = new Array();
+    for(let i = 0; i < data[0].length; i++) {      
+      newRow[i] = {
+          id: this.randomId(),
+          content: newContent
+          };            
+    }
+    data.push(newRow);
+    console.log(data);
+    this.setState({cellsData: data});
+  }
+
+  addColumnHandler() {
+    console.log('addColumnHandler executed');
+
+    let data = this.state.cellsData;    
+    let newContent = this.randomContent();
+    for(let j = 0; j < data.length; j++) {      
+      let newCell = { 
+        id: this.randomId(),
+        content: newContent
+      };
+      data[j].push( newCell );            
+    }
+    
+    console.log(data);
+    this.setState({cellsData: data});
+  }
+
+  deleteLine(btnType, btnPosition) {
+    console.log(`deleteLine(${btnType}, ${btnPosition})`);
+  }
+  
+  render() {
+    const cellSize = this.props.cellSize;
+    const cellsData = this.state.cellsData;
+    const isDelRowBtnShown = this.state.isDelRowBtnShown;
+    const DelRowBtnPosition = this.state.DelRowBtnPosition;
+    const isDelColumnBtnShown = this.state.isDelColumnBtnShown;
+    const DelColumnBtnPosition = this.state.DelColumnBtnPosition; 
+    const self = this;
+    const width = cellSize * cellsData[0].length; // current width of MyTable in pixels
+    const tableTemplate = cellsData.map( function(rowData, rowIndex) {
+        return (
+          <TableRow key={rowIndex}
+                    cellSize={cellSize}
+                    rowIndex={rowIndex}  
+                    rowData={rowData} 
+                    showDeleteControls={self.showDeleteControls}
+                    hideDeleteControls={self.hideDeleteControls}
+          />
+        );
+      });
+    const leftPanelButtons = cellsData.map( function(rowData, rowIndex) {
+        return (
+          <DeleteButton key={rowIndex}                    
+                    btnPosition={rowIndex}  
+                    btnType="delRow"
+                    isShown={isDelRowBtnShown 
+                            && (DelRowBtnPosition === rowIndex)}                    
+                    onDelBtnClick={self.deleteLine}                    
+          />
+        );
+      });
+    
+    const topPanelButtons = cellsData[0].map( function(cellData, colIndex) {
+        return (
+          <DeleteButton key={colIndex}                    
+                    btnPosition={colIndex}  
+                    btnType="delColumn"
+                    isShown={isDelColumnBtnShown 
+                            && (DelColumnBtnPosition === colIndex)}
+                    onDelBtnClick={self.deleteLine}                    
+          />
+        );
+      });
+
+    const myTableStyle = {
+      width: width+'px'
+    };
+
     return (
-      <div className="main">
+      <div className="MyTable" style={myTableStyle} >
+        
         {tableTemplate}
 
         
-        {/* 
-        <div class="delrow_panel"> 
-          <div className="btn btn__del btn__del-row none"></div> 
-        </div> 
-        */}
-        <Panel type="delrow_panel" onHover={this.showDelButton}/> 
         
-        {/*
-        <div className="delcol_panel">
-          <div className="btn btn__del btn__del-col none"></div>
+        <div className="left_panel" style={ {width: cellSize + 'px'} }>
+          {leftPanelButtons}
         </div>
-        */}
-        <Panel type="delcol_panel" onHover={}/> 
+        
+        
+        <div className="top_panel" style={ {width: width + 'px'} }>
+          {topPanelButtons}
+        </div>
+         
 
-        <Button type='new_row' /> {/* <div className="btn btn__add btn__add-row"></div> */}
-        <Button type='new_column' /> {/* <div className="btn btn__add btn__add-col"></div> */}
+      <AddButton  type="addRow" 
+                  addRowHandler={this.addRowHandler}
+      />
+      <AddButton  type="addColumn"
+                  addColumnHandler={this.addColumnHandler}
+      />
+      
 
       </div>
     );
   }
 
 }
+
+export default MyTable;
