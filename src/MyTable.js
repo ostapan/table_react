@@ -5,66 +5,69 @@
 
 import React, { Component, PropTypes } from 'react';
 import TableRow from 'TableRow';
-import TableCell from 'TableCell';
-import DeleteControlPanel from 'DeleteControlPanel';
-import AddControlPanel from 'AddControlPanel';
+import Cell from 'Cell';
+import Panel from 'Panel';
+import Button from 'Button';
 
 class MyTable extends Component {
+  
   constructor(props) {
-    super(props);
+    super(props);    
     this.state = {
+      allCels: this.props.,
       showDelColButton: false,
-      showDelRowButton: false
+      showDelRowButton: false,
+      currentPosition: {colPostion: -1, rowPosition: -1}
     }
+    this.showDelButton = this.showDelButton.bind(this);
   }
 
   static propTypes = {
-    cols: PropTypes.number.isRequired,
-    rows: PropTypes.number.isRequired
+    cellData: PropTypes.array.isRequired    
+  }
+
+  showDelButton(coords) {
+    const {curCol, curRow} = coords;
+    const rowsAmount = this.props.allCels.length;
+    let showDelColButton =  (colsAmount > 1) ;
+    if ( rowsAmount <= 1 || !curCol) curCol = -1;
+    if ( colsAmount <= 1 || !curRow) curRow = -1;
+    this.setState({
+      currentPosition: {colPostion: curCol, rowPosition: curRow}
+      showDelColButton: false,
+      showDelRowButton: false     
+    })
   }
 
   render() {
-    const rowsNum = this.props.rows;
-    const colsNum = this.props.cols;
+
+    const tableTemplate = this.props.allCells.map( function(rowData, rowIndex) {
+      return (
+        <TableRow key={rowIndex} rowData={rowData} />
+        );
+    });
+    
     return (
       <div className="main">
-        for 
-        <div className="row">
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-        </div>
-        <div className="row">
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-        </div>
-        <div className="row">
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-        </div>
-        <div className="row">
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-        </div>
-        
+        {tableTemplate}
 
-        <div className="delrow_panel">
-          <div className="btn btn__del btn__del-row none"></div>
-        </div>
         
+        {/* 
+        <div class="delrow_panel"> 
+          <div className="btn btn__del btn__del-row none"></div> 
+        </div> 
+        */}
+        <Panel type="delrow_panel" onHover={this.showDelButton}/> 
+        
+        {/*
         <div className="delcol_panel">
           <div className="btn btn__del btn__del-col none"></div>
         </div>
+        */}
+        <Panel type="delcol_panel" onHover={}/> 
 
-            <div className="btn btn__add btn__add-row"></div>
-        <div className="btn btn__add btn__add-col"></div>
+        <Button type='new_row' /> {/* <div className="btn btn__add btn__add-row"></div> */}
+        <Button type='new_column' /> {/* <div className="btn btn__add btn__add-col"></div> */}
 
       </div>
     );

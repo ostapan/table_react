@@ -19,17 +19,23 @@ class App extends Component {
   }
 
   deleteRow() {
+    // TODO: refactor into certain row deletion
     let prevRows = this.state.rows;
     if (prevRows > 1) prevRows--;
     setState({ rows: prevRows});
   }
 
   deleteCol() {
+    // TODO: refactor into certain cell deletion in each row
     let prevCols = this.state.cols;
     if (prevCols > 1) prevCols--;
     setState({ rows: prevCols});
   }
 
+
+  // no need in all this code below if root comonent becomes an event dispatcher
+  // via state and props interfaces
+  
   // componentDidMount(){
   //   var self = this;
     
