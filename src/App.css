@@ -63,7 +63,10 @@ div {
   width: 50px; /* CELL_SIZE */ 
   height: 50px; /* CELL_SIZE */
   border: 1px dotted rgba(255,255,255,0);
-  background-clip: content-box; 
+  background-clip: content-box;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAMAAAC67D+PAAAAElBMVEUAAAD3x2j////62Zf61pD979TXPpZaAAAAAXRSTlMAQObYZgAAACZJREFUeAFjAAJGJiYGKGDGy2SCA2QmCzMzKxMTMzMzI24TWCBMABfAAHYeG94/AAAAAElFTkSuQmCC);
+  background-position: center center;
+  background-repeat: no-repeat;
   transition: background 800ms ease-in-out,
               display  800ms ease-in-out;                 
   background-color: rgb(243, 165, 0);
@@ -113,10 +116,12 @@ div {
   border: 1px dotted rgba(255,255,255,0);
   background-clip: content-box; 
   background-color: rgb(178, 0, 0);
-
-  transition: background .9s ease-in-out,
-              display  .9s ease-in-out,                    
-              opacity .4s linear;                 
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAMAAAAolt3jAAAAD1BMVEUAAAD////fkpHQYF/dioml9AsKAAAAAXRSTlMAQObYZgAAABZJREFUeAFjoCVghANsXBYmKGCmqqUAEHQALNcMbN4AAAAASUVORK5CYII=);
+  background-position: center center;
+  background-repeat: no-repeat;
+  transition: background .6s ease-in-out,
+              display  .6s ease-in-out,                    
+              opacity .2s linear;                 
 }
 
 .DeleteButton.show {

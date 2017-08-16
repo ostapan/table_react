@@ -25,7 +25,8 @@ class TableRow extends Component {
         <Cell key={columnPosition}              
               columnPosition={columnPosition} 
               rowPosition={rowPosition}
-              cellData={cellData} 
+              cellData={cellData}
+              isFancy={this.props.isFancy} 
               showDeleteControls={this.props.showDeleteControls}
               hideDeleteControls={this.props.hideDeleteControls}
         />

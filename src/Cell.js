@@ -41,11 +41,15 @@ class Cell extends Component {
     const cellSize = this.props.cellSize;
     const rowPosition = this.props.rowPosition;
     const columnPosition = this.props.columnPosition;
+    const cellStyle = this.props.isFancy ? {backgroundColor: this.props.cellData.content} : {};   
 
+    
     return (
       <div  className='cell' 
             onMouseOver={this.onMouseOverCell}
-            onMouseOut={this.onMouseOutCell} ></div>
+            onMouseOut={this.onMouseOutCell} 
+            style={cellStyle}
+      ></div>
     );
   }
 

@@ -5,79 +5,80 @@ import MyTable from './MyTable';
 
 //window.ee = new EventEmitter();
 
-const DEFAULT_CELL_SIZE = 50;
+export const FANCY_MODE = true;
 
+const DEFAULT_CELL_SIZE = 50;
 const initialCellsArray = [
   [
     {
       id: '001001',
-      content: '11'
+      content: '#48AAE6'
     },
     {
       id: '001002',
-      content: '12'
+      content: '#48AAE6'
     },
     {
       id: '001003',
-      content: '13'
+      content: '#48AAE6'
     },
     {
       id: '001004',
-      content: '14'
+      content: '#48AAE6'
     }
   ],
   [
     {
       id: '002001',
-      content: '21'
+      content: '#48AAE6'
     },
     {
       id: '002002',
-      content: '22'
+      content: '#48AAE6'
     },
     {
       id: '002003',
-      content: '23'
+      content: '#48AAE6'
     },
     {
       id: '002004',
-      content: '24'
+      content: '#48AAE6'
     }
   ],
   [
     {
       id: '003001',
-      content: '31'
+      content: '#48AAE6'
     },
     {
       id: '003002',
-      content: '32'
+      content: '#48AAE6'
     },
     {
       id: '003003',
-      content: '33'
+      content: '#48AAE6'
     },
     {
       id: '003004',
-      content: '34'
+      content: '#48AAE6'
     }
   ],
   [
     {
       id: '004001',
-      content: '41'
+      content: '#48AAE6'
     },
     {
       id: '004002',
-      content: '42'
+      content: '#48AAE6'
     },
     {
       id: '004003',
-      content: '43'
+      content: '#48AAE6'
     },
     {
       id: '004004',
-      content: '44'
+      content: '#48AAE6'
     }
   ]
 ];
@@ -86,6 +87,16 @@ class App extends Component {
   
   constructor(props) {
     super(props);
+    this.state = {
+      isFancy: false
+    }
+    this.onFancyClick = this.onFancyClick.bind(this);
+  }
+
+  onFancyClick() {
+    this.setState({
+      isFancy: !this.state.isFancy
+    });
   }
 
   render() {
@@ -96,9 +107,19 @@ class App extends Component {
           <h2>MyTable on ReactJS</h2>
         </div>
         <div className='myTable'>
+          <label>
+            <br />
+            <input  type='checkbox'
+                    defaultChecked={this.state.isFancy}                      
+                    onClick={this.onFancyClick}
+            />
+            Enable color mode
+          </label>
+
           <MyTable 
-            allCells = {initialCellsArray}
-            cellSize = {DEFAULT_CELL_SIZE}
+            allCells={initialCellsArray}
+            cellSize={DEFAULT_CELL_SIZE}
+            isFancy={this.state.isFancy}
             />
         </div>
       </div>
@@ -107,3 +128,4 @@ class App extends Component {
 }
 
 export default App;
+

@@ -43,7 +43,7 @@ class MyTable extends Component {
   }
 
   showDeleteControls(coords) {
-    console.log(`showDeleteControls(row: ${coords.row}, col: ${coords.col})`);
+    // console.log(`showDeleteControls(row: ${coords.row}, col: ${coords.col})`);
     const data = this.state.cellsData;
     const rowsAmount = data.length;
     const columnsAmount = data[0].length;    
@@ -57,15 +57,15 @@ class MyTable extends Component {
   }
   
   hideDeleteControls(coords) {
-    console.log(`hideDeleteControls(row: ${coords.row}, col: ${coords.col})`);
+    // console.log(`hideDeleteControls(row: ${coords.row}, col: ${coords.col})`);
     this.setState({
-      isDelRowBtnShown: false,      
+      isDelRowBtnShown: false,
       isDelColumnBtnShown: false
     });
   }
 
   addRowHandler() {
-    console.log('addRowHandler executed');
+    // console.log('addRowHandler executed');
     
     let data = this.state.cellsData;
     let newContent = this.randomContent();
@@ -77,12 +77,12 @@ class MyTable extends Component {
           };            
     }
     data.push(newRow);
-    console.log(data);
+    // console.log(data);
     this.setState({cellsData: data});
   }
 
   addColumnHandler() {
-    console.log('addColumnHandler executed');
+    // console.log('addColumnHandler executed');
 
     let data = this.state.cellsData;    
     let newContent = this.randomContent();
@@ -94,12 +94,20 @@ class MyTable extends Component {
       data[j].push( newCell );            
     }
     
-    console.log(data);
+    // console.log(data);
     this.setState({cellsData: data});
   }
 
-  deleteLine(btnType, btnPosition) {
-    console.log(`deleteLine(${btnType}, ${btnPosition})`);
+  deleteLine(delDirection, position) {
+    console.log(`deleteLine(${delDirection}, ${position})`);
+    let data = this.state.cellsData;
+
+    if (delDirection === 'delRow' && data.length > 1) {
+      data.splice(position, 1);
+    } else if (delDirection === 'delColumn' && data[0].length > 1) {
+      data = data.filter( (rowData, rowIndex) => rowData.splice(position, 1) );
+    }
+    this.setState({cellsData: data});
   }
   
   render() {
@@ -116,7 +124,8 @@ class MyTable extends Component {
           <TableRow key={rowIndex}
                     cellSize={cellSize}
                     rowIndex={rowIndex}  
-                    rowData={rowData} 
+                    rowData={rowData}
+                    isFancy={self.props.isFancy} 
                     showDeleteControls={self.showDeleteControls}
                     hideDeleteControls={self.hideDeleteControls}
           />
@@ -128,7 +137,9 @@ class MyTable extends Component {
                     btnPosition={rowIndex}  
                     btnType="delRow"
                     isShown={isDelRowBtnShown 
-                            && (DelRowBtnPosition === rowIndex)}                    
+                            && (DelRowBtnPosition === rowIndex)}
+                    mouseOverHandler={self.showDeleteControls}
+                    mouseOutHandler={self.hideDeleteControls}
                     onDelBtnClick={self.deleteLine}                    
           />
         );
@@ -141,6 +152,8 @@ class MyTable extends Component {
                     btnType="delColumn"
                     isShown={isDelColumnBtnShown 
                             && (DelColumnBtnPosition === colIndex)}
+                    mouseOverHandler={self.showDeleteControls}
+                    mouseOutHandler={self.hideDeleteControls}                           
                     onDelBtnClick={self.deleteLine}                    
           />
         );
@@ -155,12 +168,9 @@ class MyTable extends Component {
         
         {tableTemplate}
 
-        
-        
         <div className="left_panel" style={ {width: cellSize + 'px'} }>
           {leftPanelButtons}
         </div>
-        
         
         <div className="top_panel" style={ {width: width + 'px'} }>
           {topPanelButtons}
