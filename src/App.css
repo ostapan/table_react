@@ -38,7 +38,7 @@ div {
   margin: 133px auto; /* CELL_SIZE*2 */
   padding: 1px;       
   border: 1px solid rgb(72, 170, 230);  
-  font-size:0;      
+  font-size:0;  
 }
 
 .row {        
@@ -104,7 +104,7 @@ div {
   bottom: 100%;
   width: 200px; /* !!!!!!!!!!!!!! same as table width*/ /* CELL_SIZE * CELLS_AMOUNT_IN_A_ROW */
   border: 1px dotted rgba(255,255,255,0);                
-  border-bottom: 2px dotted rgba(255,255,255,0);
+  border-bottom: 2px dotted rgba(255,255,255,0);  
 }
 
 .DeleteButton {
