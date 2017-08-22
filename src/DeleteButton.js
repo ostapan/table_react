@@ -9,9 +9,6 @@ class DeleteButton extends Component {
   
   constructor(props) {
     super(props);
-     // this.state = {
-     //   isVisible: this.props.isShown
-     // };
     this.onDelBtnClick = this.onDelBtnClick.bind(this);
     this.onDelBtnMouseOver = this.onDelBtnMouseOver.bind(this);
     this.onDelBtnMouseOut = this.onDelBtnMouseOut.bind(this);
@@ -30,9 +27,6 @@ class DeleteButton extends Component {
   }
 
   onDelBtnMouseOver() {
-    // this.setState({
-    //   isVisible: true
-    // });
     let coords = {};
     if (this.props.btnType === 'delRow') {
       coords = { 

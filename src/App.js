@@ -3,10 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import MyTable from './MyTable';
 
-//window.ee = new EventEmitter();
-
 export const FANCY_MODE = true;
-
 const DEFAULT_CELL_SIZE = 50;
 const initialCellsArray = [
   [
@@ -128,4 +125,3 @@ class App extends Component {
 }
 
 export default App;
-

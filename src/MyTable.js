@@ -42,8 +42,7 @@ class MyTable extends Component {
     return '#'+Math.floor(Math.random()*16777215).toString(16);
   }
 
-  showDeleteControls(coords) {
-    // console.log(`showDeleteControls(row: ${coords.row}, col: ${coords.col})`);
+  showDeleteControls(coords) {    
     const data = this.state.cellsData;
     const rowsAmount = data.length;
     const columnsAmount = data[0].length;    
@@ -56,8 +55,7 @@ class MyTable extends Component {
     });
   }
   
-  hideDeleteControls(coords) {
-    // console.log(`hideDeleteControls(row: ${coords.row}, col: ${coords.col})`);
+  hideDeleteControls(coords) {    
     this.setState({
       isDelRowBtnShown: false,
       isDelColumnBtnShown: false
@@ -65,8 +63,6 @@ class MyTable extends Component {
   }
 
   addRowHandler() {
-    // console.log('addRowHandler executed');
-    
     let data = this.state.cellsData;
     let newContent = this.randomContent();
     let newRow = new Array();
@@ -77,13 +73,10 @@ class MyTable extends Component {
           };            
     }
     data.push(newRow);
-    // console.log(data);
     this.setState({cellsData: data});
   }
 
   addColumnHandler() {
-    // console.log('addColumnHandler executed');
-
     let data = this.state.cellsData;    
     let newContent = this.randomContent();
     for(let j = 0; j < data.length; j++) {      
@@ -93,8 +86,7 @@ class MyTable extends Component {
       };
       data[j].push( newCell );            
     }
-    
-    // console.log(data);
+   
     this.setState({cellsData: data});
   }
 
@@ -178,11 +170,9 @@ class MyTable extends Component {
          
 
       <AddButton  type="addRow" 
-                  addRowHandler={this.addRowHandler}
-      />
+                  addRowHandler={this.addRowHandler}  />
       <AddButton  type="addColumn"
-                  addColumnHandler={this.addColumnHandler}
-      />
+                  addColumnHandler={this.addColumnHandler} />
       
 
       </div>

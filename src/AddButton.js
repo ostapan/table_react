@@ -26,7 +26,7 @@ class AddButton extends Component {
       addRow: 'AddRowBtn',
       addColumn: 'AddColumnBtn'
     } 
-    //console.log('button className = ' + btnClassNames[this.props.type]);   
+    
     return (
 
       <div  className={btnClassNames[this.props.type]} 

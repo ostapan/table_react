@@ -19,8 +19,7 @@ class Cell extends Component {
     cellData: PropTypes.object
   }
 
-  onMouseOverCell() {
-    // console.log('in:' + this.props);
+  onMouseOverCell() {    
     const coords = {
       row: this.props.rowPosition, 
       col: this.props.columnPosition
@@ -28,8 +27,7 @@ class Cell extends Component {
     this.props.showDeleteControls(coords);
   }
 
-  onMouseOutCell() {
-    // console.log('out:' + this.props);
+  onMouseOutCell() {    
     const coords = {
       row: this.props.rowPosition, 
       col: this.props.columnPosition
@@ -42,7 +40,6 @@ class Cell extends Component {
     const rowPosition = this.props.rowPosition;
     const columnPosition = this.props.columnPosition;
     const cellStyle = this.props.isFancy ? {backgroundColor: this.props.cellData.content} : {};   
-
     
     return (
       <div  className='cell' 
