@@ -50,6 +50,7 @@
 .mytable__btn--del {
   background-color: rgb(178, 0, 0);
   background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGc+PGxpbmUgc3Ryb2tlLWxpbmVjYXA9InNxdWFyZSIgaWQ9Im1pbnVzX3NpZ24iIHkyPSIyNSIgeDI9IjMwIiB5MT0iMjUiIHgxPSIyMCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2U9IndoaXRlIiAvPjwvZz48L3N2Zz4=');
+  transition: all .6s ease-in-out;
 }
 
 .mytable__btn--del:hover {

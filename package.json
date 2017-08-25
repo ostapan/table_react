@@ -15,6 +15,8 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage" : "https://ostapan.github.io/table_react"
-
+  "homepage": "https://ostapan.github.io/table_react",
+  "devDependencies": {
+    "gh-pages": "^1.0.0"
+  }
 }
