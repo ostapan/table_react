@@ -1,60 +1,55 @@
 /* 
- * DeleteButton component
- * Used to render and handele Delete Button click
+ * DeleteButton stateless component
+ * Button click can delete row or column depending on button's type
  */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 class DeleteButton extends Component {
   
   constructor(props) {
     super(props);
-    this.onDelBtnClick = this.onDelBtnClick.bind(this);
-    this.onDelBtnMouseOver = this.onDelBtnMouseOver.bind(this);
-    this.onDelBtnMouseOut = this.onDelBtnMouseOut.bind(this);
+    this._onDelBtnClick = this._onDelBtnClick.bind(this);
   }
 
-  static propTypes = {    
-    btnPosition: PropTypes.number.isRequired,
-    btnType: PropTypes.string.isRequired,
-    onDelBtnClick: PropTypes.func.isRequired
-  }
-
-  onDelBtnClick() {
-    const btnPosition = this.props.btnPosition;
-    const btnType = this.props.btnType;
-    this.props.onDelBtnClick(btnType, btnPosition)
-  }
-
-  onDelBtnMouseOver() {
-    let coords = {};
-    if (this.props.btnType === 'delRow') {
-      coords = { 
-        row: this.props.btnPosition,
-        col: -1
-      } 
-    } else if (this.props.btnType === 'delColumn') {
-      coords = { 
-        row: -1,
-        col: this.props.btnPosition
-      } 
+  _getbtnClassNames(btnType) {
+    switch(btnType) {
+    case 'delRow':
+      return 'mytable__btn mytable__btn--del mytable__btn--del-row';
+    case 'delColumn':
+      return 'mytable__btn mytable__btn--del mytable__btn--del-column';
+    default:
+      return '';
     }
-    this.props.mouseOverHandler(coords);
   }
 
-  onDelBtnMouseOut() {
-    this.setState({
-       isVisible: false
-    });
+  _onDelBtnClick() {
+    this.props.onDeleteHandler(this.props.type, this.props.position);
+  }
+
+  _getBtnStyle(btnType) {
+    let btnStyle = {};
+    if (!this.props.isShown) {
+      btnStyle = {display: 'none'}
+    } else {
+      const btnPosition = parseInt(this.props.position, 10);
+      if ('delRow' === btnType) {
+        btnStyle = { top: `${52 * btnPosition}px`}
+      }
+      if ('delColumn' === btnType) {
+        btnStyle = { left: `${52 * btnPosition}px`}
+      }
+    }
+    return btnStyle;
   }
 
   render() {    
+    const btnType = this.props.type;
     return (
-      <div  className={'DeleteButton ' + (this.props.isShown ? 'show' : 'hide' )}
-            onClick={this.onDelBtnClick}
-            onMouseOver={this.onDelBtnMouseOver}
-            onMouseOut={this.onDelBtnMouseOut}
-            ></div>
+      <button className={this._getbtnClassNames(btnType)}
+              onClick={this._onDelBtnClick}
+              style={this._getBtnStyle(btnType)} >
+      </button>
     );
   }
 

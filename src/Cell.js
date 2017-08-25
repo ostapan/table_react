@@ -1,54 +1,35 @@
 /* 
  * Cell component
- * Used to one and only cell
+ * Renders one cell, passes mouseOver event handling to parent
  */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 class Cell extends Component {
-  
+
   constructor(props) {
     super(props);
-    this.onMouseOverCell = this.onMouseOverCell.bind(this);
-    this.onMouseOutCell = this.onMouseOutCell.bind(this);
+    this._onMouseOverCell = this._onMouseOverCell.bind(this);
   }
 
-  static propTypes = {    
-    columnPosition: PropTypes.number.isRequired,
-    rowPosition: PropTypes.number.isRequired,
-    cellData: PropTypes.object
-  }
-
-  onMouseOverCell() {    
-    const coords = {
-      row: this.props.rowPosition, 
-      col: this.props.columnPosition
+  _onMouseOverCell() {
+    const position = {
+      row: this.props.row, 
+      column: this.props.column
     };
-    this.props.showDeleteControls(coords);
+    this.props.mouseOverHandler(position);    
   }
-
-  onMouseOutCell() {    
-    const coords = {
-      row: this.props.rowPosition, 
-      col: this.props.columnPosition
-    };
-    this.props.hideDeleteControls(coords);   
-  }
-
-  render() {
-    const cellSize = this.props.cellSize;
-    const rowPosition = this.props.rowPosition;
-    const columnPosition = this.props.columnPosition;
-    const cellStyle = this.props.isFancy ? {backgroundColor: this.props.cellData.content} : {};   
-    
+  
+  render() {   
+    const data = this.props.data;
+    const cellStyle =  this.props.isFancy ? {backgroundColor: data.color} : {};    
     return (
-      <div  className='cell' 
-            onMouseOver={this.onMouseOverCell}
-            onMouseOut={this.onMouseOutCell} 
-            style={cellStyle}
-      ></div>
+      <td className='mytable__cell' 
+          style={cellStyle}
+          onMouseOver={this._onMouseOverCell}
+      ></td>
     );
-  }
+  }  
 
 }
 

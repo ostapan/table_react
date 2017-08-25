@@ -1,0 +1,94 @@
+/*
+ * Styles for MyTable app
+ */
+
+.mytable {
+  display: inline-block;
+  padding: 4px 0 0 4px;
+  margin: 80px 60px 60px;
+  font-size: 0;
+}
+
+.mytable__container {
+  position: relative;
+  display: inline-block; 
+}
+
+.mytable__table {
+  display: inline-block;
+  border: 1px solid rgb(72, 170, 230);
+}
+
+.mytable__cell {
+  box-sizing: border-box;
+  width: 50px;
+  min-width: 50px;
+  height: 50px;
+  border: 1px solid rgba(255,255,255,0.0);
+  background-color: rgb(72, 170, 230);
+  transition: color .8s ease-in-out;
+}
+
+.mytable__btn {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  border: none;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transition: background .8s ease-in-out;
+  cursor: pointer;
+}
+
+.mytable__btn:active,
+.mytable__btn:focus {
+  outline: none;
+  border: none;
+}
+
+.mytable__btn--del {
+  background-color: rgb(178, 0, 0);
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGc+PGxpbmUgc3Ryb2tlLWxpbmVjYXA9InNxdWFyZSIgaWQ9Im1pbnVzX3NpZ24iIHkyPSIyNSIgeDI9IjMwIiB5MT0iMjUiIHgxPSIyMCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2U9IndoaXRlIiAvPjwvZz48L3N2Zz4=');
+}
+
+.mytable__btn--del:hover {
+  background-color: rgb(202, 76, 73);
+}
+
+.mytable__btn--add {        
+  background-color: rgb(243, 165, 0);
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGc+PGxpbmUgc3Ryb2tlLWxpbmVjYXA9InNxdWFyZSIgaWQ9ImRhc2hfaCIgeTI9IjI1IiB4Mj0iMzAiIHkxPSIyNSIgeDE9IjIwIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZT0id2hpdGUiLz48bGluZSBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBpZD0iZGFzaF92IiB5Mj0iMzAiIHgyPSIyNSIgeTE9IjIwIiB4MT0iMjUiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlPSJ3aGl0ZSIvPjwvZz48L3N2Zz4=');
+}
+
+.mytable__btn--add:hover {
+  background-color: rgb(246, 192, 82);
+} 
+
+.mytable__btn--del-column {
+  left: 0;
+  bottom: 100%;
+  margin-bottom: 2px;
+  margin-left: 3px;
+}
+
+.mytable__btn--del-row {
+  right: 100%;
+  top: 0;
+  margin-right: 2px;
+  margin-top: 3px;       
+} 
+
+.mytable__btn--add-column {
+  top: 0;
+  left: 100%;        
+  margin-top: 3px;
+  margin-left: 2px;
+}
+
+.mytable__btn--add-row {
+  top: 100%;
+  left: 0;
+  margin-left: 3px;
+  margin-top: 2px;
+}

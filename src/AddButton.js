@@ -1,36 +1,43 @@
 /* 
- * AddButton component
- * Adds new row or new column depending on type
+ * AddButton stateless component
+ * Button click can add new row or new column depending on button's type
  */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 class AddButton extends Component {
   
-  constructor(props) {
-    super(props);
-    this.onAddBtnClick = this.onAddBtnClick.bind(this);
-  }
-
-  onAddBtnClick() {
-    const buttonType = this.props.type;
-    if (buttonType === 'addRow') {
-      this.props.addRowHandler();
-    } else if (buttonType === 'addColumn') {
-      this.props.addColumnHandler();
-    }    
-  }
-
-  render() {  
-    const btnClassNames = {
-      addRow: 'AddRowBtn',
-      addColumn: 'AddColumnBtn'
-    } 
+  _getBtnClassName(btnType) {    
+    switch(btnType) {
+    case 'addRow':
+      return 'mytable__btn mytable__btn--add mytable__btn--add-row';
+    case 'addColumn':
+      return 'mytable__btn mytable__btn--add mytable__btn--add-column';
+    default:
+      return '';
+    }
+  } 
+  
+  _getBtnStyle(btnType) {    
+    if(!this.props.isFancy) return {};
     
-    return (
+    switch(btnType) {
+    case 'addRow':
+      return { width: 'calc(100% - 6px)'};
+    case 'addColumn':
+      return { height: 'calc(100% - 6px)'};
+    default:
+      return {};
+    }   
+  }
 
-      <div  className={btnClassNames[this.props.type]} 
-            onClick={this.onAddBtnClick} ></div>
+  render() {
+    const btnType = this.props.type;
+    return (
+      <button className={this._getBtnClassName(btnType)} 
+              onClick={this.props.onAddHandler} 
+              style={this._getBtnStyle(btnType)}>
+      </button>
     );
   }
 
