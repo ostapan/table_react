@@ -15,8 +15,8 @@ class MyTable extends Component {
     super(props);    
     this.state = {
       tableData: this.props.tableData,
-      delRowBtnPosition: -1,
-      delColumnBtnPosition: -1,
+      delRowBtnPosition: 0,
+      delColumnBtnPosition: 0,
       delRowBtnShown: false,
       delColumnBtnShown: false
     }
@@ -141,7 +141,7 @@ class MyTable extends Component {
 
   render() {
     return (      
-      <div className="mytable" onMouseLeave={this._hideDelButtons}>
+      <main className="mytable" onMouseLeave={this._hideDelButtons}>
         <div className="mytable__container">
 
           <DeleteButton type="delRow"
@@ -165,7 +165,7 @@ class MyTable extends Component {
                       isFancy={this.props.isFancy} />
         
         </div>
-      </div>
+      </main>
     );
   }
 

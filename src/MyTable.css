@@ -1,5 +1,5 @@
 /*
- * Styles for MyTable app
+ * Styles for MyTable component
  */
 
 .mytable {
@@ -25,8 +25,7 @@
   min-width: 50px;
   height: 50px;
   border: 1px solid rgba(255,255,255,0.0);
-  background-color: rgb(72, 170, 230);
-  transition: color .8s ease-in-out;
+  background-color: rgb(72, 170, 230);  
 }
 
 .mytable__btn {
@@ -50,7 +49,7 @@
 .mytable__btn--del {
   background-color: rgb(178, 0, 0);
   background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGc+PGxpbmUgc3Ryb2tlLWxpbmVjYXA9InNxdWFyZSIgaWQ9Im1pbnVzX3NpZ24iIHkyPSIyNSIgeDI9IjMwIiB5MT0iMjUiIHgxPSIyMCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2U9IndoaXRlIiAvPjwvZz48L3N2Zz4=');
-  transition: all .6s ease-in-out;
+  transition: all .3s ease-out;
 }
 
 .mytable__btn--del:hover {

@@ -61,8 +61,8 @@ class App extends Component {
           <label>
               <input  type='checkbox'
                       defaultChecked={this.state.isFancy}                      
-                      onClick={this.onFancyClick}
-              />Enable color mode
+                      onClick={this.onFancyClick}/>
+              Enable color mode
           </label>
           </form>        
 

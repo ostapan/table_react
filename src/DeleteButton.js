@@ -29,16 +29,20 @@ class DeleteButton extends Component {
 
   _getBtnStyle(btnType) {
     let btnStyle = {};
+    const btnPosition = parseInt(this.props.position, 10);
+    if ('delRow' === btnType) {
+      btnStyle = { top: `${52 * btnPosition}px`}
+    }
+    if ('delColumn' === btnType) {
+      btnStyle = { left: `${52 * btnPosition}px`}
+    }
     if (!this.props.isShown) {
-      btnStyle = {display: 'none'}
-    } else {
-      const btnPosition = parseInt(this.props.position, 10);
-      if ('delRow' === btnType) {
-        btnStyle = { top: `${52 * btnPosition}px`}
-      }
-      if ('delColumn' === btnType) {
-        btnStyle = { left: `${52 * btnPosition}px`}
-      }
+      btnStyle = {
+        ...btnStyle,        
+        width: 0, 
+        height: 0, 
+        opacity: .5, 
+        };
     }
     return btnStyle;
   }
