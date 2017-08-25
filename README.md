@@ -1,3 +1,7 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+# MyTable 
+
+View working demo at [https://ostapan.github.io/table_react](https://ostapan.github.io/table_react)
+
+### The task:
 
 ![task](task.png)
