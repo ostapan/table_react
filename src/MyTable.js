@@ -108,35 +108,35 @@ class MyTable extends Component {
 
   _getTableStructure() {
     const data = this.state.tableData;
-    const rowsTemplate = data.map( (rowData, rowIndex) => 
-            this._getRowStructure(rowData, rowIndex)
-          );
-
+    const isFancy = this.props.isFancy;
+    const showDelButtons = this._showDelButtons;
+    
     return (
         <table className="mytable__table">
           <tbody>
-            {rowsTemplate}
+            
+            {
+              data.map( (rowData, rowIndex) => (
+
+                  <tr key={this._getRandomId()}>                  
+                  {
+                    rowData.map( (cellData, columnIndex) => (                    
+                      <Cell key={cellData.id}
+                            row={rowIndex}
+                            column={columnIndex}
+                            data={cellData}
+                            isFancy={isFancy}
+                            mouseOverHandler={showDelButtons}
+                      />
+                    ))
+                  }
+                  </tr>
+              ))
+            }
+
           </tbody>
         </table>
-    );
-  }
-
-  _getRowStructure(rowData, rowIndex) {
-    const cellsTemplate = rowData.map( (cellData, columnIndex) => (
-        <Cell key={cellData.id}
-              row={rowIndex}
-              column={columnIndex}
-              data={cellData}
-              isFancy={this.props.isFancy}
-              mouseOverHandler={this._showDelButtons}
-        />
-        )
-      );
-    return (
-      <tr key={rowIndex}>
-        {cellsTemplate}
-      </tr>
-    );
+    ); 
   }
 
   render() {

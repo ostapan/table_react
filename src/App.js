@@ -8,30 +8,9 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import MyTable from './MyTable';
+import { data } from './data'
 
-let initialCellsArray = Array(4);
-for (let i = 0; i < 4; i++) {  
-  initialCellsArray[i] = Array(4);
-  let rowColor = getRandomColor();
-  for (let j = 0; j < 4; j++) {    
-    initialCellsArray[i][j] = {
-      id: getRandomId(),
-      color: rowColor
-    };
-  }
-}
-
-function getRandomId() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      let r = Math.random() * 16 | 0;
-      let v = (c === 'x') ? r : ((r & 0x3) | 0x8);
-      return v.toString(16);
-    });
-}
-
-function getRandomColor() {    
-  return '#'+Math.floor(Math.random()*16777215).toString(16);
-}
+const INITIAL_DATA = data;
 
 class App extends Component {
   
@@ -58,15 +37,14 @@ class App extends Component {
           <h2>MyTable on ReactJS</h2>        
         </header>
         <form method="get" action="#">
-          <label>
-              <input  type='checkbox'
-                      defaultChecked={this.state.isFancy}                      
-                      onClick={this.onFancyClick}/>
-              Enable color mode
-          </label>
-          </form>        
+          <input  id="enableFancy"
+                  type='checkbox'
+                  defaultChecked={this.state.isFancy}                      
+                  onClick={this.onFancyClick} />
+          <label htmlFor="enableFancy">Enable fancy color mode</label>
+        </form>        
 
-        <MyTable  tableData={initialCellsArray}                  
+        <MyTable  tableData={INITIAL_DATA}                  
                   isFancy={this.state.isFancy} />        
       </div>
     );
