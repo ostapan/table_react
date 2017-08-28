@@ -18,12 +18,10 @@ class App extends Component {
     super(props);
     this.state = {
       isFancy: false
-    }
-    this.onFancyClick = this.onFancyClick.bind(this);
-  }
+    }    
+  }  
 
-  onFancyClick(event) {
-    event.stopPropagation();
+  onFancyClick = () => {    
     this.setState({
       isFancy: !this.state.isFancy
     });
@@ -37,14 +35,18 @@ class App extends Component {
           <h2>MyTable on ReactJS</h2>        
         </header>
         <aside>
-          <input  id="enableFancy"
-                    type='checkbox'
-                    defaultChecked={this.state.isFancy}                      
-                    onClick={this.onFancyClick} />
+          <input  
+            id="enableFancy"
+            type='checkbox'
+            defaultChecked={this.state.isFancy}                      
+            onClick={this.onFancyClick} 
+           />
           <label htmlFor="enableFancy">Enable fancy color mode</label>
         </aside>
-        <MyTable  tableData={INITIAL_DATA}                  
-                  isFancy={this.state.isFancy} />        
+        <MyTable  
+          tableData={INITIAL_DATA}                  
+          isFancy={this.state.isFancy}
+         />        
       </div>
     );
   }
