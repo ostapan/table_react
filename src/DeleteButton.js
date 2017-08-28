@@ -39,9 +39,7 @@ class DeleteButton extends Component {
     if (!this.props.isShown) {
       btnStyle = {
         ...btnStyle,        
-        width: 0, 
-        height: 0, 
-        opacity: .5, 
+        display: 'none',
         };
     }
     return btnStyle;
