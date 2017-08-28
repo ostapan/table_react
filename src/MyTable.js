@@ -19,11 +19,6 @@ class MyTable extends Component {
       delRowBtnShown: false,
       delColumnBtnShown: false,
     };
-    this.addRow = this.addRow.bind(this);
-    this.addColumn = this.addColumn.bind(this);
-    this.deleteLine = this.deleteLine.bind(this);
-    this.showDelButtons = this.showDelButtons.bind(this);
-    this.hideDelButtons = this.hideDelButtons.bind(this);
   }
 
   getRandomId() {
@@ -38,7 +33,7 @@ class MyTable extends Component {
     return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
   }
 
-  addRow() {
+  addRow = () => {
     const data = [...this.state.tableData];
     const newColor = this.getRandomColor(); // same color for all cells in new row
     const newRow = [];
@@ -52,7 +47,7 @@ class MyTable extends Component {
     this.setState({ tableData: data });
   }
 
-  addColumn() {
+  addColumn = () => {
     const data = [...this.state.tableData];
     const newColor = this.getRandomColor(); // same color for all cells in new column    
     data.forEach(rowData =>
@@ -64,7 +59,7 @@ class MyTable extends Component {
     this.setState({ tableData: data });
   }
 
-  deleteLine(delDirection, position) {
+  deleteLine = (delDirection, position) => {
     let data = [...this.state.tableData];
     let delRowBtnShown = this.state.delRowBtnShown;
     let delColumnBtnShown = this.state.delRowBtnShown;
@@ -90,7 +85,7 @@ class MyTable extends Component {
 
   }
 
-  showDelButtons(position) {
+  showDelButtons = (position) => {
     const data = this.state.tableData;
     const rowsAmount = data.length;
     const columnsAmount = data[0].length;
@@ -103,7 +98,7 @@ class MyTable extends Component {
     });
   }
 
-  hideDelButtons() {
+  hideDelButtons = () => {
     this.setState({
       delRowBtnShown: false,
       delColumnBtnShown: false,
