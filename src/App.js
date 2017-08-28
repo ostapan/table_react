@@ -36,14 +36,13 @@ class App extends Component {
           <img src={logo} className="app__logo" alt="logo" />
           <h2>MyTable on ReactJS</h2>        
         </header>
-        <form method="get" action="#">
+        <aside>
           <input  id="enableFancy"
-                  type='checkbox'
-                  defaultChecked={this.state.isFancy}                      
-                  onClick={this.onFancyClick} />
+                    type='checkbox'
+                    defaultChecked={this.state.isFancy}                      
+                    onClick={this.onFancyClick} />
           <label htmlFor="enableFancy">Enable fancy color mode</label>
-        </form>        
-
+        </aside>
         <MyTable  tableData={INITIAL_DATA}                  
                   isFancy={this.state.isFancy} />        
       </div>

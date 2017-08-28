@@ -118,7 +118,7 @@ class MyTable extends Component {
             {
               data.map( (rowData, rowIndex) => (
 
-                  <tr key={this._getRandomId()}>                  
+                  <tr key={'rowkey__' + rowData[0].id}>                  
                   {
                     rowData.map( (cellData, columnIndex) => (                    
                       <Cell key={cellData.id}
